@@ -40,7 +40,7 @@ public class WardController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @GetMapping("/{provinceCode}")
+    @GetMapping("/getByProvinceCode/{provinceCode}")
     public ResponseEntity<List<WardDTO>> getByProvinceCode(@PathVariable String provinceCode) {
         List<WardDTO> wards = wardService.getByProvinceCode(provinceCode);
         return ResponseEntity.status(HttpStatus.OK).body(wards);
