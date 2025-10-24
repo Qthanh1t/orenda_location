@@ -40,4 +40,46 @@
                                  constraintName="fk_wards_province_code"/>
     </changeSet>
 
+    <changeSet id="2.1-delete-all-wards" author="you">
+        <comment>Delete all data from wards table (must run before deleting provinces due to FK)</comment>
+        <delete tableName="wards"/>
+    </changeSet>
+
+    <changeSet id="2.2-delete-all-provinces" author="you">
+        <comment>Delete all data from provinces table</comment>
+        <delete tableName="provinces"/>
+    </changeSet>
+
+    <changeSet id="3-load-provinces-data" author="you">
+        <loadData
+                tableName="provinces"
+                file="db/changelog/data/tinh.csv"
+                encoding="UTF-8"
+                separator=","
+                quotchar='"'
+                skipLines="1"
+                usePreparedStatements="true">
+
+            <column header="code" name="code" type="STRING"/>
+
+            <column header="Name" name="name" type="STRING"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="4-load-wards-data" author="you">
+        <loadData
+                tableName="wards"
+                file="db/changelog/data/xa.csv"
+                encoding="UTF-8"
+                separator=","
+                quotchar='"'
+                skipLines="1"
+                usePreparedStatements="true">
+
+            <column header="code" name="code" type="STRING"/>
+            <column header="Name" name="name" type="STRING"/>
+
+            <column header="ProvinceCode" name="province_code" type="STRING"/>
+        </loadData>
+    </changeSet>
 </databaseChangeLog>
